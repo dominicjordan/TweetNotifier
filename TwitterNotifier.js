@@ -4,7 +4,7 @@ function check () {
 	console.log("Start check");
 i++;
 	if(document.getElementsByClassName('stream-item js-new-items-bar-container')[0].innerHTML.length > 5) {
-		console.log("NEW");
+		eventFire(document.getElementsByClassName('new-tweets-bar js-new-tweets-bar')[0], 'click');
 		notify();
 return true;
 	} else {
@@ -44,4 +44,14 @@ function notify() {
 
   }
 
+}
+
+function eventFire(el, etype){
+  if (el.fireEvent) {
+    el.fireEvent('on' + etype);
+  } else {
+    var evObj = document.createEvent('Events');
+    evObj.initEvent(etype, true, false);
+    el.dispatchEvent(evObj);
+  }
 }
